@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <util:properties location="classpath:props/redis.properties" id="redisPropConf"/>
+    <!--设置数据池-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+    	 <!-- 控制一个pool可分配多少个jedis实例 -->
+        <property name="maxIdle" value="#{redisPropConf.maxIdle}"/>
+         <!-- 连接池中最多可空闲maxIdle个连接 ，这里取值为20，表示即使没有数据库连接时依然可以保持20空闲的连接，而不被清除，随时处于待命状态。 -->
+        <property name="maxTotal" value="#{redisPropConf.maxTotal}"/>
+          <!-- 在获取连接的时候检查有效性 -->
+        <property name="testOnBorrow" value="#{redisPropConf.testOnBorrow}"/>
+          <!-- 最大等待时间:当没有可用连接时,连接池等待连接被归还的最大时间(以毫秒计数),超过时间则抛出异常 -->
+        <property name="maxWaitMillis" value="#{redisPropConf.maxWaitMillis}"/>
+    </bean>
+
+    <!--配置JedisPool-->
+    <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+        <constructor-arg name="poolConfig" ref="jedisPoolConfig" />
+        <constructor-arg name="host" value="#{redisPropConf.host}" />
+        <constructor-arg name="port" value="#{redisPropConf.port}" type="int" />
+    </bean>
+    
+     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">  
+        <property name="connectionFactory" ref="jedisConnectionFactory"/> 
+        <property name="keySerializer">
+			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="valueSerializer">
+			<bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+		</property> 
+    </bean>
+
+   <!-- 消息接受类 -->
+    <bean id="redisTestMessageListener" class="com.dongao.job.service.impl.RedisTestMessageListener"></bean>  
+    
+    <bean id="redisContainer" class="org.springframework.data.redis.listener.RedisMessageListenerContainer">
+        <property name="connectionFactory" ref="jedisConnectionFactory" />
+        <property name="taskExecutor"><!-- 此处有个奇怪的问题，无法正确使用其他类型的Executor -->  
+            <bean class="org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler">  
+                <property name="poolSize" value="2"></property>  
+            </bean>  
+        </property>
+        <property name="messageListeners">
+            <map>
+                <entry key-ref="redisTestMessageListener">
+                    <list>
+                        <!-- 普通订阅，订阅具体的频道 -->
+                        <bean class="org.springframework.data.redis.listener.ChannelTopic">
+                            <constructor-arg value="${redis.test.channel1}" />
+                        </bean>
+                        <bean class="org.springframework.data.redis.listener.ChannelTopic">
+                            <constructor-arg value="${redis.test.channel2}" />
+                        </bean>                       
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean> 
+    
+</beans>

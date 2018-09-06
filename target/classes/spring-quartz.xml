@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-4.2.xsd
+http://www.springframework.org/schema/task 
+http://www.springframework.org/schema/task/spring-task-4.2.xsd 
+">
+	
+    <!--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>任务调度配置<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+    <!--  实例化bean  定义实现的作业-->
+    <bean  id="demo" class="com.ssm.qt.QuartzDemo" />
+    
+    <!--  配置<MethodInvokingJobDetailFactoryBean></MethodInvokingJobDetailFactoryBean> -->
+    <bean id="testTaskMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="demo" />
+        <property name="targetMethod" value="execute" />
+        <property name="concurrent" value="false" />
+    </bean>
+    <!-- <bean id="testTaskMethod2" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="demo" />
+        <property name="targetMethod" value="execute2" />
+        <property name="concurrent" value="false" />
+    </bean> -->
+
+	 <!--  ============= 调度触发器 ============= -->
+    <bean id="articleBatchRunTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="testTaskMethod" />
+        <!-- 每隔5秒钟执行一次    value="0 0/1 * * * ?" -->
+        <property name="cronExpression" value="0 0/1 * * * ?" />
+    </bean>
+   <!--   <bean id="articleBatchRunTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="testTaskMethod2" />
+        每隔5秒钟执行一次    value="0 0/1 * * * ?"
+        <property name="cronExpression" value="0 0 */1 * * * ?" />
+    </bean> -->
+    <!--其他执行执行规则可以自行查找-->
+    
+    <!--  ============= 调度工厂  ============= -->
+    <bean id="schedulerBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"
+          lazy-init="false">
+        <property name="triggers">
+            <list>
+               <!--  <ref bean="articleBatchRunTrigger" /> -->
+                 <!-- <ref bean="articleBatchRunTrigger2" /> -->
+            </list>
+        </property>
+    </bean>
+
+</beans>

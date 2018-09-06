@@ -1,0 +1,68 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.2.xsd ">
+	
+	<!-- 引入属性文件 -->
+	<context:property-placeholder location="classpath:props/*.properties" />
+	
+	<import resource="classpath:spring-cxf.xml"></import>  
+	<import resource="classpath:spring-redis.xml"></import> 
+	<import resource="classpath:spring-rabbitmq.xml"></import> 
+	<import resource="classpath:spring-quartz.xml"></import> 
+
+	<!-- <bean id="prop" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+	   这里是PropertiesFactoryBean类，它也有个locations属性，也是接收一个数组，跟上面一样
+	   <property name="locations">
+	       <array>
+	          <value>classpath:jdbc.properties</value>
+	       </array>
+	   </property>
+	</bean> -->
+	
+	 <!-- 定义数据源Bean -->
+    <!-- Druid -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+    </bean>
+    
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+     <!-- 配置基于注解的声明式事务 @Transactional-->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    
+     <!-- 注册SqlSessionFactoryBean -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+        <!-- 自动扫描mappers.xml文件 -->
+        <property name="typeAliasesPackage" value="com.ssm.domain" />
+        <property name="mapperLocations" value="classpath:com/ssm/dao/*Mapper.xml" />
+    </bean>
+    
+     <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.ssm.dao" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+    </bean>
+     <bean class="com.ssm.listener.StartAddCacheListener"/>
+</beans>

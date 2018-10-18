@@ -6,11 +6,18 @@
 <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.min.css" >
 <script type="text/javascript"  src="../static/jquery/jquery-1.11.1.js"></script>
 <script type="text/javascript"  src="../static/bootstrap/js/bootstrap.min.js"></script>
+<style type="text/css">
+.line{
+text-decoration:line-through;
+}
+</style>
+
 </head>
 <body>
 <button id="fat-btn" class="btn btn-primary" data-loading-text="Loading..." 
    	type="button"> 加载状态
 </button>
+<div><p class="line">99</p></div>
 <script>
     $(function() {
         $(".btn").click(function(){

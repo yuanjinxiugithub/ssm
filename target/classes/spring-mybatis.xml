@@ -12,7 +12,6 @@
 		http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 		http://www.springframework.org/schema/tx 
 		http://www.springframework.org/schema/tx/spring-tx-4.2.xsd ">
-	
 	<!-- 引入属性文件 -->
 	<context:property-placeholder location="classpath:props/*.properties" />
 	
@@ -20,7 +19,7 @@
 	<import resource="classpath:spring-redis.xml"></import> 
 	<import resource="classpath:spring-rabbitmq.xml"></import> 
 	<import resource="classpath:spring-quartz.xml"></import> 
-
+     <!--开启面向切面的注解  -->
 	<!-- <bean id="prop" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 	   这里是PropertiesFactoryBean类，它也有个locations属性，也是接收一个数组，跟上面一样
 	   <property name="locations">
@@ -46,7 +45,7 @@
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    
+   
      <!-- 配置基于注解的声明式事务 @Transactional-->
     <tx:annotation-driven transaction-manager="transactionManager" />
     
@@ -65,4 +64,6 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
      <bean class="com.ssm.listener.StartAddCacheListener"/>
+   
+     
 </beans>

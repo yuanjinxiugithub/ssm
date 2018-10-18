@@ -1,5 +1,6 @@
 package com.ssm.service.impl;
 
+import java.net.URL;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -7,10 +8,15 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.w3c.dom.Document;
 
+import com.ssm.base.util.XmlUtil;
 import com.ssm.dao.UserDao;
 import com.ssm.domain.User;
 import com.ssm.service.UserService;
+import com.ssm.service.log.LogService;
+import com.ssm.service.log.LogTest;
+import com.ssm.service.log.LogType;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -21,17 +27,33 @@ public class UserServiceImpl implements UserService{
 	 @Resource
 	 private UserDao userDao;
 	 
-	 @Autowired 
-	  private JedisPool jedisPool;
+	/* @Autowired 
+	  private JedisPool jedisPool;*/
 	 
+	/*  @Autowired 
+	  private LogService logService;*/
+	 
+    
 	@Override
+	@LogTest(getLogType = LogType.type1)
 	public List<User> findList() {
-		// TODO Auto-generated method stub
-		Jedis jedis = jedisPool.getResource();
-		jedis.select(2);//切换redis数据库
-		jedis.set("mykey","abc");
-	    System.out.println("redis 存储的字符串为: "+ jedis.get("mykey"));
+		/*Jedis jedis = null;
+		try {
+			jedis = jedisPool.getResource();
+			jedis.select(2);//切换redis数据库
+			jedis.set("mykey", "abc");
+			System.out.println("redis 存储的字符串为: "+ jedis.get("mykey"));
+		} finally {
+			// TODO: handle finally clause
+			if(jedis != null){
+				jedis.close();
+				jedis.disconnect();
+				jedis=null;
+			}
+		}*/
+		//logService.exec(null);
 		return userDao.findList();
+		
 	}
 
 }

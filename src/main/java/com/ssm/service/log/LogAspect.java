@@ -1,11 +1,8 @@
 package com.ssm.service.log;
 
 import java.lang.reflect.Method;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import org.apache.commons.lang3.time.DateUtils;
+import java.util.Random;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -17,15 +14,20 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.ssm.domain.LogInfo;
 
 @Component //定义类为spring 组件
 @Aspect //定义类为切面类
 public class LogAspect {
+	@Autowired
+	private LogService logDao;
 	protected Logger logger = LoggerFactory.getLogger(getClass());
    
 	/**   
-	 * @Title: onMethod    方法执行时--定义切入点，提供一个方法,这个方法的名字就死该切入点的ID
+	 * @Title: onMethod    方法执行时--定义切入点，提供一个方法,这个方法的名字就是该切入点的ID
 	 * @Description: TODO(这里用一句话描述这个方法的作用)   这里使用的是 LogTest注解为切入点 
 	 * @param:       
 	 * @return: void      
@@ -59,7 +61,14 @@ public class LogAspect {
 		Method method = methodSignature.getMethod();//获取目标队形正在执行的方法
 		if(method !=null){
 			LogTest logA = method.getAnnotation(LogTest.class);
-			System.out.println("after之后获取注解的type:"+logA.getLogType());
+			LogInfo info = new LogInfo();
+			 Random random = new Random();  
+			info.setId(String.valueOf(random.nextInt(41) + 10));
+			info.setBackInfo("123");
+			info.setCreateTime(new Date());
+			info.setLogType(String.valueOf(logA.getLogType()));
+			/*logDao.insert(info);*/
+			Queue.queue.offer(info);
 		}
 	}
 	

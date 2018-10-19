@@ -13,7 +13,9 @@ public class LogInfo implements Serializable{
 	
 	private String tableName;
 	private String id;
-	private Date crateTime;
+	private String backInfo;//返回的信息
+	private Date createTime;
+	private String logType;//日志类型
 	
 	public String getTableName() {
 		return tableName;
@@ -27,11 +29,23 @@ public class LogInfo implements Serializable{
 	public void setId(String id) {
 		this.id = id;
 	}
-	public Date getCrateTime() {
-		return crateTime;
+	public String getBackInfo() {
+		return backInfo;
 	}
-	public void setCrateTime(Date crateTime) {
-		this.crateTime = crateTime;
+	public void setBackInfo(String backInfo) {
+		this.backInfo = backInfo;
+	}
+	public String getLogType() {
+		return logType;
+	}
+	public void setLogType(String logType) {
+		this.logType = logType;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 	
 

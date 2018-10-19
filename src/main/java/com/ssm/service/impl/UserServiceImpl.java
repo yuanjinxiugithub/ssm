@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService{
     
 	@Override
 	@LogTest(getLogType = LogType.type1)
+	@Transactional(readOnly = false)
 	public List<User> findList() {
 		/*Jedis jedis = null;
 		try {
@@ -52,7 +53,7 @@ public class UserServiceImpl implements UserService{
 			}
 		}*/
 		//logService.exec(null);
-		return userDao.findList();
+		return null;
 		
 	}
 

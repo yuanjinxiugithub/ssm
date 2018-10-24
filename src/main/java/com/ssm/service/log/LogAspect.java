@@ -64,7 +64,7 @@ public class LogAspect {
 			LogInfo info = new LogInfo();
 			 Random random = new Random();  
 			info.setId(String.valueOf(random.nextInt(41) + 10));
-			info.setBackInfo("123");
+		//	info.setBackInfo("123");
 			info.setCreateTime(new Date());
 			info.setLogType(String.valueOf(logA.getLogType()));
 			/*logDao.insert(info);*/

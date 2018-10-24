@@ -29,12 +29,6 @@ public class LogInfo implements Serializable{
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getBackInfo() {
-		return backInfo;
-	}
-	public void setBackInfo(String backInfo) {
-		this.backInfo = backInfo;
-	}
 	public String getLogType() {
 		return logType;
 	}

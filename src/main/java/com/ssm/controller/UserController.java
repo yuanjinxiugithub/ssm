@@ -53,9 +53,9 @@ public class UserController {
 		try {
 			LogInfo info = new LogInfo();
 			info.setId("123");
-			info.setBackInfo("123");
+			//info.setBackInfo("123");
 			info.setCreateTime(new Date());
-			logService.insert(info);
+			//logService.insert(info);
 			//list = userService.findList();
 			//MyWebScoket.sendMessage("msg",list); //调用webscoket 返回给页面数据
 			result = AjaxResponder.getInstance(Boolean.TRUE , "查询成功"  , list);

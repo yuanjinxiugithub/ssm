@@ -68,5 +68,7 @@
     </bean>
      <bean class="com.ssm.listener.StartAddCacheListener"/>
    <bean id="springContextUtil" class="com.ssm.base.util.SpringContextUtil"></bean>
+   
+    <!--  <bean id="logService" class="com.ssm.service.log.LogService"></bean> -->
      
 </beans>

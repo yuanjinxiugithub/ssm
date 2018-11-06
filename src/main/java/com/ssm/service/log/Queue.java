@@ -6,8 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.ssm.base.util.SpringContextUtil;
 import com.ssm.domain.LogInfo;
@@ -18,7 +16,8 @@ import com.ssm.service.UserService;
  *   执行队列
  */
 public class Queue {
-/*	@Autowired
+	
+	/*@Autowired
 	private static LogService logService;*/
 	
 	protected static Logger logger = LoggerFactory.getLogger(Queue.class);
@@ -33,9 +32,9 @@ public class Queue {
 						try {
 							//WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
 							ApplicationContext appCtx = SpringContextUtil.getApplicationContext();
-							UserService logService =(UserService) appCtx.getBean("userService");
-							//logService.insert(entity);
-							logService.findList();
+							LogService logService =(LogService) appCtx.getBean("logService");
+							logService.insert(entity);
+							//logService.findList();
 						} catch (Exception e) {
 							// TODO: handle exception
 							e.printStackTrace();

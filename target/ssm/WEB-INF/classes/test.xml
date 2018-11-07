@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<booklist>
+	<book category="这是分类1">
+		<title>这是标题1</title>
+		<author>这是作者1</author>
+	</book>
+	<book category="这是分类2">
+		<title>这是标题2</title>
+		<author>这是作者2</author>
+	</book>
+	<book category="这是分类3">
+		<title>这是标题3</title>
+		<author>这是作者3</author>
+	</book>
+	<book category="这是分类4">
+		<title>这是标题4</title>
+		<author>这是作者4</author>
+	</book>
+</booklist>

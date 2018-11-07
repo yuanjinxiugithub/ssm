@@ -23,6 +23,9 @@ public class UserController {
 	 @Resource
 	 private UserService userService;
 	 
+	/* @Autowired
+	 private */
+	 
 	 @Resource
 	 private LogService logService;
 	 

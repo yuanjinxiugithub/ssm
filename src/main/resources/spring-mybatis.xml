@@ -15,10 +15,12 @@
 	<!-- 引入属性文件 -->
 	<context:property-placeholder location="classpath:props/*.properties" />
 	
-	<import resource="classpath:spring-cxf.xml"></import>  
+	<import resource="classpath:spring-mvc.xml"></import>
+    <import resource="classpath:spring-cxf.xml"></import>   
 	<import resource="classpath:spring-redis.xml"></import> 
 	<import resource="classpath:spring-rabbitmq.xml"></import> 
 	<import resource="classpath:spring-quartz.xml"></import> 
+	<import resource="classpath:spring-dubbo-provider.xml"></import> 
      <!--开启面向切面的注解  -->
 	<!-- <bean id="prop" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 	   这里是PropertiesFactoryBean类，它也有个locations属性，也是接收一个数组，跟上面一样

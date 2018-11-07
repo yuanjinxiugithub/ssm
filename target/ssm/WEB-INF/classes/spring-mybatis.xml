@@ -12,15 +12,16 @@
 		http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 		http://www.springframework.org/schema/tx 
 		http://www.springframework.org/schema/tx/spring-tx-4.2.xsd ">
-	
 	<!-- 引入属性文件 -->
 	<context:property-placeholder location="classpath:props/*.properties" />
 	
-	<import resource="classpath:spring-cxf.xml"></import>  
+	<import resource="classpath:spring-mvc.xml"></import>
+    <import resource="classpath:spring-cxf.xml"></import>   
 	<import resource="classpath:spring-redis.xml"></import> 
 	<import resource="classpath:spring-rabbitmq.xml"></import> 
 	<import resource="classpath:spring-quartz.xml"></import> 
-
+	<import resource="classpath:spring-dubbo-provider.xml"></import> 
+     <!--开启面向切面的注解  -->
 	<!-- <bean id="prop" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 	   这里是PropertiesFactoryBean类，它也有个locations属性，也是接收一个数组，跟上面一样
 	   <property name="locations">
@@ -42,13 +43,15 @@
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+    
     <!-- 配置事务管理器 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    
+   
      <!-- 配置基于注解的声明式事务 @Transactional-->
-    <tx:annotation-driven transaction-manager="transactionManager" />
+    <tx:annotation-driven transaction-manager="transactionManager"  proxy-target-class="true"/>
+   
     
      <!-- 注册SqlSessionFactoryBean -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -63,6 +66,11 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.ssm.dao" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+        <property name="annotationClass" value="org.springframework.stereotype.Repository"/>
     </bean>
      <bean class="com.ssm.listener.StartAddCacheListener"/>
+   <bean id="springContextUtil" class="com.ssm.base.util.SpringContextUtil"></bean>
+   
+    <!--  <bean id="logService" class="com.ssm.service.log.LogService"></bean> -->
+     
 </beans>

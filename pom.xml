@@ -178,6 +178,18 @@
 			<version>${druid.version}</version>
 		</dependency>
 
+         <!-- mongodb开始 -->
+         <dependency>  
+            <groupId>org.mongodb</groupId>  
+            <artifactId>mongo-java-driver</artifactId>  
+            <version>3.3.0</version>  
+        </dependency> 
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>1.7.1.RELEASE</version>
+        </dependency>
+        <!-- mongodb结束 -->
 		<!-- Spring集成MyBatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -309,6 +321,11 @@
 			<artifactId>zkclient</artifactId>
 			<version>0.9</version>
 		</dependency>
+		<dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.0.0</version>
+        </dependency>
 	</dependencies>
 	<build>
 		<finalName>ssm</finalName>

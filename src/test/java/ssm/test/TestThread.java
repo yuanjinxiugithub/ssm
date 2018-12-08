@@ -1,4 +1,4 @@
-package ssm.test;
+/*package ssm.test;
 
 public class TestThread extends Thread{
 
@@ -28,3 +28,4 @@ public class TestThread extends Thread{
 	}
 	
 }
+*/

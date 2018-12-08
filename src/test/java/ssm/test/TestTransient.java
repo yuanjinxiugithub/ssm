@@ -1,4 +1,4 @@
-package ssm.test;
+/*package ssm.test;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -6,10 +6,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-/**
+*//**
  * @author yjx
  * transient 关键字使用
- */
+ *//*
 class UserInfo implements Serializable {  
     private static final long serialVersionUID = 996890129747019948L;  
     private String name;  
@@ -20,9 +20,7 @@ class UserInfo implements Serializable {
         this.psw = psw;  
     }  
 
-    public String toString() {  
-        return "name=" + name + ", psw=" + psw;  
-    }  
+   
 }  
 
 public class TestTransient {
@@ -50,3 +48,4 @@ public class TestTransient {
         }  
     }  
 }
+*/

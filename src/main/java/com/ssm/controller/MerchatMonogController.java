@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssm.domain.DataGrid;
 import com.ssm.domain.Test;
-import com.ssm.domain.User;
 import com.ssm.service.MerchantMongoService;
 
 
@@ -26,12 +25,12 @@ public class MerchatMonogController {
          ,@RequestParam(required=false,value="sort[id]")String sortid
          ,@RequestParam(required=false,value="searchPhrase")String searchPhrase){
      List<Test> list=merchantMongoService.getpiclist(current,rowCount,sortid);
-   /*  int total=merchantMongoService.getpicturenum();*/
+     int total=merchantMongoService.getNums();
      DataGrid<Test> grid=new DataGrid<Test>();
      grid.setCurrent(current);
      grid.setRowCount(rowCount);
      grid.setRows(list);
-     grid.setTotal(112);
+     grid.setTotal(total);
      return grid;
      /*}else{
          List<Picture> list=mongodbService.getsearchresult(current, rowCount, sortid, searchPhrase);

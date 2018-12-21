@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	Date.prototype.Format = function(fmt)   
+	{ //author: meizz   
+	  var o = {   
+	    "M+" : this.getMonth()+1,                 //月份   
+	    "d+" : this.getDate(),                    //日   
+	    "h+" : this.getHours(),                   //小时   
+	    "m+" : this.getMinutes(),                 //分   
+	    "s+" : this.getSeconds(),                 //秒   
+	    "q+" : Math.floor((this.getMonth()+3)/3), //季度   
+	    "S"  : this.getMilliseconds()             //毫秒   
+	  };   
+	  if(/(y+)/.test(fmt))   
+	    fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));   
+	  for(var k in o)   
+	    if(new RegExp("("+ k +")").test(fmt))   
+	  fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
+	  return fmt;   
+	}  
+	var now = new Date();
+    var preDate = new Date(now.getTime() - 24*60*60*1000).Format("yyyy-MM-dd"); 
+    var get = s_to_hs(1222);
+    var min = get.h;
+    var sec = get.s;
+    console.log(min);
+    console.log(sec);
+    
+    function s_to_hs(s){
+        //计算分钟
+        //算法：将秒数除以60，然后下舍入，既得到分钟数
+        var h;
+        h  =   Math.floor(s/60);
+        //计算秒
+        //算法：取得秒%60的余数，既得到秒数
+        s  =   s%60;
+        //将变量转换为字符串
+        h    +=    '';
+        s    +=    '';
+        //如果只有一位数，前面增加一个0
+        h  =   (h.length==1)?'0'+h:h;
+        s  =   (s.length==1)?'0'+s:s;
+        return h+':'+s;
+    }
+	</script>
+</body>
+</html>

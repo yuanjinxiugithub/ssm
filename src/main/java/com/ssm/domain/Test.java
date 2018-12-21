@@ -3,7 +3,7 @@ package com.ssm.domain;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="test")
-public class Test {
+public class Test { // 需要声明其为文档类型 对应mongodb中的模板
     String id;
     String name;
     String date;

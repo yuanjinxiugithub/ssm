@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService{
 			}
 		}*/
 		//logService.exec(null);
-		return userDao.findList();
+		return userDao.findList(); 
 		
 	}
 

@@ -2,6 +2,7 @@ package com.ssm.controller;
 
 import java.util.List;
 
+import org.apache.commons.io.input.TeeInputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +43,13 @@ public class MerchatMonogController {
          grid.setTotal(total);
          return grid;
      }*/
+ }
+ 
+ @RequestMapping(value="/save")
+ @ResponseBody 
+ public String save(Test test){
+   merchantMongoService.SaveorUpdatePicture(test);
+   return null;
  }
  
 }

@@ -68,5 +68,6 @@
   </bean> -->
   
   <mongo:repositories base-package="com.ssm.repository" />
- 
+  <!-- 配置mongo的repositiories -->
+  
 </beans>

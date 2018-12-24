@@ -18,6 +18,7 @@ public class MerchatMongoServiceImpl implements MerchantMongoService {
     /*
      * @Autowired private MongoDao mongoDao;
      */
+    
     @Autowired
     private MerchantMongoRepository merchantMongoDao;
 
@@ -45,5 +46,11 @@ public class MerchatMongoServiceImpl implements MerchantMongoService {
     public int getNums() {
         // TODO Auto-generated method stub
         return (int) merchantMongoDao.count();
+    }
+
+    @Override
+    public void SaveorUpdatePicture(Test test) {
+        // TODO Auto-generated method stub
+        merchantMongoDao.insert(test);
     }
 }

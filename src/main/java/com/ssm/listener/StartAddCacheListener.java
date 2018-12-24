@@ -21,7 +21,7 @@ public class StartAddCacheListener implements ApplicationListener<ContextRefresh
              		//userService.findList();
 	   }
 		  if (event instanceof ContextRefreshedEvent) { 
-			  System.out.println("spring容易初始化完毕================================================888"); 
+		/*	  System.out.println("spring容易初始化完毕================================================888"); */
 			  } 
 }
 }

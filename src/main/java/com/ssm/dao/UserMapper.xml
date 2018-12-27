@@ -4,7 +4,8 @@
     <select id="findList" resultType="User" >
         SELECT 
          id AS "userid",
-         user_name AS "username"
+         user_name AS "username",
+         pwd AS "password"
          FROM t_user 
     </select>
 </mapper>

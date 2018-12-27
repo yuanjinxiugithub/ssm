@@ -13,7 +13,7 @@ public class ExectorMain {
     /*    proxy.readFile(null);*/
         
         ReadFile proxy2 = (ReadFile) new SecretaryInvokeHandler(file).geInstance(ReadFile.class);
-        proxy2.readFile(null);
+        proxy2.readFile(null); //proxy 每调用一次readFile() 时都会执行invoke() 方法
     }
 
 }

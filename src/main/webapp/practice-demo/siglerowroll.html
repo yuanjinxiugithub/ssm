@@ -39,12 +39,22 @@
 
 	<script type="text/javascript">
 		$(function () {
-			setInterval(() => {
+			/* setInterval(() => {
 				$(".box li").eq(0).slideUp(1000,function(){//以滑动的方式隐藏掉元素
 					$(this).appendTo($(this).parent());// 将元素追加到父元素的后面 
 				});
-			}, 1000);
+			}, 1000); */
+			setInterval('autoScroll(".box")', 1000);
 		});
+		
+		 function autoScroll(obj){ //obj 滚动对象
+			$(obj).find("ul").animate({//执行css集的自定义动画
+				marginTop:"-40px"
+			},400,function(){
+				$(this).css({marginTop: "0px"}).find("li").eq(0).appendTo(this);
+			});
+		}
+		
 	</script>
 
 </body>

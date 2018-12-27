@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<title>单行滚动案例(基于jquery)</title>
+<script type="text/javascript" src="../static/jquery/jquery.js"></script>
+<style type="text/css">
+* {
+	padding: 0;
+	margin: 0;
+}
+
+.box {
+	width: 200px;
+	height: 40px;
+	border: 1px solid blue;
+	margin: 100px auto;
+	background-color: #efefef;
+	overflow: hidden;
+}
+
+.box li {
+	width: 200px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	list-style: none;
+}
+</style>
+</head>
+<body>
+	<div class="box">
+		<ul>
+			<li>第&nbsp;&nbsp;&nbsp;一&nbsp;&nbsp;&nbsp;行</li>
+			<li>第&nbsp;&nbsp;&nbsp;二&nbsp;&nbsp;&nbsp;行</li>
+			<li>第&nbsp;&nbsp;&nbsp;三&nbsp;&nbsp;&nbsp;行</li>
+		</ul>
+	</div>
+
+	<script type="text/javascript">
+		$(function () {
+			setInterval(() => {
+				$(".box li").eq(0).slideUp(1000,function(){//以滑动的方式隐藏掉元素
+					$(this).appendTo($(this).parent());// 将元素追加到父元素的后面 
+				});
+			}, 1000);
+		});
+	</script>
+
+</body>
+</html>

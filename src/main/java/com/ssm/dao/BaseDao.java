@@ -22,7 +22,7 @@ public class BaseDao {
     private static ResultSet rs = null;
     static {
         try {
-            Class.forName(driver);
+            Class.forName(driver);//注册jdbc 驱动
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

@@ -18,7 +18,7 @@ public class MethodReflect {
            System.out.println(method.getName()); //获取方法名称
        }
        //调用类中的方法
-       Method methodSetName = heroClass.getMethod("setName", String.class);
+       Method methodSetName = heroClass.getMethod("setName", String.class);// 参数类型
        Method methodGetName = heroClass.getMethod("getName");
        Object herosPo = heroClass.newInstance(); //有该类创建的创建一个新实例
        methodSetName.invoke(herosPo,"yuanjinxiu");

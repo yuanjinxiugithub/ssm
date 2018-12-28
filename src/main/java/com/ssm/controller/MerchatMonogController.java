@@ -1,6 +1,8 @@
 package com.ssm.controller;
 
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.commons.io.input.TeeInputStream;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,17 +34,8 @@ public class MerchatMonogController {
      grid.setRowCount(rowCount);
      grid.setRows(list);
      grid.setTotal(total);
+     
      return grid;
-     /*}else{
-         List<Picture> list=mongodbService.getsearchresult(current, rowCount, sortid, searchPhrase);
-         int total=mongodbService.getsearchresulttotal(searchPhrase);
-         DataGrid<Picture> grid=new DataGrid<Picture>();
-         grid.setCurrent(current);
-         grid.setRowCount(rowCount);
-         grid.setRows(list);
-         grid.setTotal(total);
-         return grid;
-     }*/
  }
  
  @RequestMapping(value="/save")

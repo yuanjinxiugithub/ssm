@@ -17,7 +17,7 @@ public class DemoController {
 	private RedisTemplate redisTemplate;
 
 	@RequestMapping("/test")
-	@ResponseBody
+	@ResponseBody  //将控制器方法返回的对象通过适当的转换器转换为指定的格式 通常用于返回json数据或者是xml
 	public String test1(){
 		String str="消息1";
 		redisTemplate.convertAndSend("channel1", str);

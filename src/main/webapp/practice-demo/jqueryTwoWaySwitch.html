@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<title>jquery 双向列表切换</title>
+<link href="switch.css"  rel="stylesheet" type="text/css" >
+<script type="text/javascript" src="../static/jquery/jquery.js"></script>
+<style type="text/css">
+</style>
+</head>
+<body>
+	<div class="title_list" style="margin: 10px 50px;">
+		<div class="transform_left">
+			<div class="transform_title">管理员</div>
+			<div class="transform_left_content">
+				<div class="transform_left_list">
+					<p>
+						<span class="online">张三1</span>
+					</p>
+					<p>
+						<span class="online">张三2</span>
+					</p>
+					<p>
+						<span>张三3</span>
+					</p>
+					<p>
+						<span>张三4</span>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="transform_content">
+			<span class="to_right">→</span> <span class="to_left">←</span>
+		</div>
+		<div class="transform_right">
+			<div class="transform_title">管理员</div>
+			<div class="transform_right_content">
+				<div class="transform_right_list">
+					<p>
+						<span class="online">李四1</span>
+					</p>
+					<p>
+						<span class="online">李四2</span>
+					</p>
+					<p>
+						<span>李四3</span>
+					</p>
+					<p>
+						<span>李四4</span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+    $(function(){
+    	SwitchData.changeSelect();
+    	SwitchData.changeBtn();
+    }); 
+    var SwitchData = {
+    	changeSelect:function(){
+    		  //左侧管理员脚步
+    	    $(".transform_left_list").delegate("p", "click", function() {
+    	        var classname = this.className;
+    	        if (classname == "selected") {
+    	            this.className = "";
+    	        } else {
+    	            this.className = "selected";
+    	        }
+    	    })
+
+    	    //右侧普通成员脚步
+    	    $(".transform_right_list").delegate("p", "click", function() {
+    	        var classname = this.className;
+    	        if (classname == "selected") {
+    	            this.className = "";
+    	        } else {
+    	            this.className = "selected";
+    	        }
+    	    })
+    	},
+    	changeBtn:function(){
+    		//点击右侧的箭头
+    	    var left_check2 = [];
+    	    $(".to_right").click(function() {
+    	        $(".transform_left_list .selected").each(function() {
+    	            left_check2.push($(this).children("span").text());
+    	            $(this).remove();
+    	            var html = "";
+    	            $.each(left_check2, function(i, v) {
+    	                html += "<p><span>" + v + "</span></p>";
+    	            });
+    	            $(".transform_right_list").append(html);
+    	            left_check2 = [];
+    	        })
+    	    })
+
+    	    //点击左侧的箭头
+    	    var left_check3 = [];
+    	    $(".to_left").click(function() {
+    	        $(".transform_right_list .selected").each(function() {
+    	            left_check3.push($(this).children("span").text());
+    	            $(this).remove();
+    	            var html = "";
+    	            $.each(left_check3, function(i, v) {
+    	                html += "<p><span>" + v + "</span></p>";
+    	            });
+    	            $(".transform_left_list").append(html);
+    	            left_check3 = [];
+    	        })
+    	    })	
+    	}
+    };
+    </script>
+
+</body>
+</html>

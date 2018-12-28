@@ -1,0 +1,86 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+li{
+    list-style: none;
+}
+
+.title_list{
+    position: absolute;
+    width: 211px;
+    height: 311px;
+    top: 46px;
+    left: 5px;
+    border: 1px solid #1c6caa;
+}
+.transform_left{
+    position: absolute;
+    width: 93px;
+    height: 312px;
+    left: 0px;
+    border-right: 1px solid #1C6CAA;
+}
+.transform_title{
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border-bottom: 1px solid #1c6caa;
+}
+.online{
+    color: #fbc552;
+}
+
+.transform_left_content{
+    position: absolute;
+    width: 93px;
+    height: 276px;
+    overflow: auto;
+}
+.transform_left_list p{
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+}
+.transform_left_list p.selected{
+    background: #6b6565;
+}
+
+
+/*中间部分*/
+.transform_content{
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    left: 97px;
+    top: 95px;
+}
+.transform_content span {
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+/*右侧部分*/
+.transform_right{
+    position: absolute;
+    width: 93px;
+    height: 312px;
+    right: 0px;
+    border-left: 1px solid #1C6CAA;
+}
+.transform_right_content{
+    position: absolute;
+    width: 93px;
+    height: 276px;
+    overflow: auto;
+}
+.transform_right_list p{
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+.transform_right_list p.selected{
+    background: #6b6565;
+}

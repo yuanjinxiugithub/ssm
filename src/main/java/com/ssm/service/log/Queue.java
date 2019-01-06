@@ -17,8 +17,8 @@ import com.ssm.service.UserService;
  */
 public class Queue {
 	
-	/*@Autowired
-	private static LogService logService;*/
+	@Autowired
+	private static LogService logService;
 	
 	protected static Logger logger = LoggerFactory.getLogger(Queue.class);
 	protected static ConcurrentLinkedQueue<LogInfo> queue = new ConcurrentLinkedQueue<>();//高并发的 基于链表的队列
@@ -28,16 +28,17 @@ public class Queue {
 			public void run() {
 				while (true) {
 					LogInfo entity = queue.poll();//
+					System.out.println(entity);
 					if(entity != null){
 						try {
-							//WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
+							/*//WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
 							ApplicationContext appCtx = SpringContextUtil.getApplicationContext();
-							LogService logService =(LogService) appCtx.getBean("logService");
+							LogService logService =(LogService) appCtx.getBean("logService");*/
 							logService.insert(entity);
 							//logService.findList();
 						} catch (Exception e) {
 							// TODO: handle exception
-							e.printStackTrace();
+						    logger.error(e.getMessage(), e);
 							logger.error(e.toString());
 						}
 					}else{

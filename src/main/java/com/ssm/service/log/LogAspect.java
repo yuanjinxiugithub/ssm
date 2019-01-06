@@ -14,6 +14,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ssm.domain.LogInfo;
@@ -21,6 +22,8 @@ import com.ssm.domain.LogInfo;
 @Component //定义类为spring 组件
 @Aspect //定义类为切面类
 public class LogAspect {
+	@Autowired
+	private LogService logDao;
 	protected Logger logger = LoggerFactory.getLogger(getClass());
    
 	/**   
@@ -61,11 +64,10 @@ public class LogAspect {
 			LogInfo info = new LogInfo();
 			 Random random = new Random();  
 			info.setId(String.valueOf(random.nextInt(41) + 10));
-		//	info.setBackInfo("123");
-			info.setCreateTime(new Date());
+			 info.setCreateTime(new Date());
 			info.setLogType(String.valueOf(logA.getLogType()));
-			/*logDao.insert(info);*/
-			Queue.queue.offer(info);
+			logDao.insert(info);
+		//	Queue.queue.offer(info);
 		}
 	}
 	

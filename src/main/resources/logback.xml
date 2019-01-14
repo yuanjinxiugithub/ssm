@@ -11,7 +11,7 @@
     </appender>
 
     <appender name="SYS_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>c:/logs/demo/system_info.log</file>
+        <file>D:/logs/demo/system_info.log</file>
         <append>true</append>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>INFO</level>
@@ -32,7 +32,7 @@
     </appender>
 
     <appender name="SYS_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>c:/logs/demo/system_error.log</file>
+        <file>D:/logs/demo/system_error.log</file>
         <append>true</append>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
@@ -40,7 +40,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>c:/logs/demo/system_error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>D:/logs/demo/system_error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -53,7 +53,7 @@
     </appender>
 
     <appender name="APP_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>c:/logs/demo/app_info.log</file>
+        <file>D:/logs/demo/app_info.log</file>
         <append>true</append>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>INFO</level>
@@ -61,7 +61,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>c:/logs/demo/app_info.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>D:/logs/demo/app_info.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -74,7 +74,7 @@
     </appender>
 
     <appender name="APP_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>c:/logs/demo/app_error.log</file>
+        <file>D:/logs/demo/app_error.log</file>
         <append>true</append>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
@@ -82,7 +82,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>c:/logs/demo/app_error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>D:/logs/demo/app_error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -95,7 +95,7 @@
     </appender>
 
 <!-- 定义日志输出级别 -->
-    <logger name="com.ssm" level="INFO" additivity="false">
+    <logger name="com.ssm" level="INFO">
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="APP_INFO" />
         <appender-ref ref="APP_ERROR" />

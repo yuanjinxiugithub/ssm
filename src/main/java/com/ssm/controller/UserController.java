@@ -32,7 +32,6 @@ public class UserController {
 	 @ResponseBody
 	 @RequestMapping(value = "/findList")
 	 public AjaxResponder findList( HttpServletRequest request,HttpServletResponse response) {
-		 
 		 AjaxResponder result = null;
 		 List<User> list = null;
 		try {
@@ -61,6 +60,7 @@ public class UserController {
 			//logService.insert(info);
 			//list = userService.findList();
 			//MyWebScoket.sendMessage("msg",list); //调用webscoket 返回给页面数据
+			logService.insert(info);
 			result = AjaxResponder.getInstance(Boolean.TRUE , "查询成功"  , list);
 		} catch (Exception e) {
 			// TODO: handle exception

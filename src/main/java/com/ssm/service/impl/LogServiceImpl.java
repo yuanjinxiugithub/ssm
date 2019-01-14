@@ -21,8 +21,8 @@ public class LogServiceImpl implements LogService{
 		// TODO Auto-generated method stub
 		//synchronized (this) {//使用sychronized 关键字 上锁
 			System.out.println("-------------------logService启动成功---------------");
-			System.out.println(logType.getLogType());
 			logDao.insert(logType);
+			System.out.println("插入数据成功");
 			//将日志保存到数据库中
 			System.out.println("-------------------logService日志结束---------------");
 		//}

@@ -2,7 +2,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
 		http://www.springframework.org/schema/mvc 
 		http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
@@ -14,13 +14,13 @@
 		http://www.springframework.org/schema/tx/spring-tx-4.2.xsd ">
 	<!-- 引入属性文件 -->
 	<context:property-placeholder location="classpath:props/*.properties" />
-	
+
 	<import resource="classpath:spring-mvc.xml"></import>
-    <import resource="classpath:spring-cxf.xml"></import>   
-	<import resource="classpath:spring-redis.xml"></import> 
-	<import resource="classpath:spring-rabbitmq.xml"></import> 
-	<import resource="classpath:spring-quartz.xml"></import> 
-	<import resource="classpath:spring-mongodb.xml"></import> 
+    <import resource="classpath:spring-cxf.xml"></import>
+	<import resource="classpath:spring-redis.xml"></import>
+	<import resource="classpath:spring-rabbitmq.xml"></import>
+	<import resource="classpath:spring-quartz.xml"></import>
+	<import resource="classpath:spring-mongodb.xml"></import>
 	<!-- <import resource="classpath:spring-dubbo-provider.xml"></import>  -->
      <!--开启面向切面的注解  -->
 	<!-- <bean id="prop" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
@@ -31,7 +31,7 @@
 	       </array>
 	   </property>
 	</bean> -->
-	
+
 	 <!-- 定义数据源Bean -->
     <!-- Druid -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
@@ -40,20 +40,20 @@
         <property name="password" value="${jdbc.password}" />
         <property name="driverClassName" value="${jdbc.driverClassName}" />
     </bean>
-    
+
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    
+
     <!-- 配置事务管理器 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-   
+
      <!-- 配置基于注解的声明式事务 @Transactional-->
     <tx:annotation-driven transaction-manager="transactionManager"  proxy-target-class="true"/>
-   
-    
+
+
      <!-- 注册SqlSessionFactoryBean -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
@@ -62,7 +62,7 @@
         <property name="typeAliasesPackage" value="com.ssm.domain" />
         <property name="mapperLocations" value="classpath:com/ssm/dao/*Mapper.xml" />
     </bean>
-    
+
      <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.ssm.dao" />
@@ -71,7 +71,6 @@
     </bean>
      <bean class="com.ssm.listener.StartAddCacheListener"/>
    <bean id="springContextUtil" class="com.ssm.base.util.SpringContextUtil"></bean>
-   
+
     <!--  <bean id="logService" class="com.ssm.service.log.LogService"></bean> -->
-     
 </beans>

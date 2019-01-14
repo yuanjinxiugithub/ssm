@@ -66,8 +66,8 @@ public class LogAspect {
 			info.setId(String.valueOf(random.nextInt(41) + 10));
 			 info.setCreateTime(new Date());
 			info.setLogType(String.valueOf(logA.getLogType()));
-			logDao.insert(info);
-		//	Queue.queue.offer(info);
+			//logDao.insert(info);
+			Queue.queue.offer(info);
 		}
 	}
 	

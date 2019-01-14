@@ -18,7 +18,7 @@ import com.ssm.service.log.LogType;
 @Transactional(readOnly = true)
 @Service("userService")
 public class UserServiceImpl implements UserService{
-	 @Resource
+	 @Autowired
 	 private UserDao userDao;
 	 
 	/* @Autowired 
